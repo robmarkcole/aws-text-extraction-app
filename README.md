@@ -13,10 +13,14 @@ All environment variables that can be passed are listed below:
 </p>
 
 ## Build Dockerfile and run
-Build and run locally:
+Build and run locally, picking up the required environment variables from your system environment:
 ```
 docker build -t aws-text-extraction-app .
-docker run -e AWS_ACCESS_KEY_ID=yous -e AWS_SECRET_ACCESS_KEY=yours aws-text-extraction-app:latest
+docker run -p 8501:8501 -e AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID -e AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY aws-text-extraction-app:latest
+```
+Alternatively pull the latest release from dockerhub with:
+```
+docker pull robmarkcole/aws-text-extraction-app:latest
 ```
 
 ## Development
