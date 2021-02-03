@@ -1,5 +1,7 @@
 # aws-text-extraction-app
-Streamlit app to extract text from an image using AWS rekognition text extraction service. Regions of interest can be applied to the image and the text within these regions downloaded as json. **Note** this app requires your AWS credentials which are passed into the app using [environment variables](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#using-environment-variables).
+Streamlit app to extract text from an image using AWS rekognition [text extraction service](https://docs.aws.amazon.com/rekognition/latest/dg/text-detecting-text-procedure.html). TODO: Regions of interest can be applied to the image and the text within these regions downloaded as json.
+
+**Note** this app requires your [AWS credentials](https://docs.aws.amazon.com/general/latest/gr/aws-security-credentials.html) which are passed into the app using [environment variables](https://boto3.amazonaws.com/v1/documentation/api/latest/guide/configuration.html#using-environment-variables).
 
 All environment variables that can be passed are listed below:
 ```
