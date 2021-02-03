@@ -8,6 +8,10 @@ All environment variables that can be passed are listed below:
 - AWS_DEFAULT_REGION : (optional) your preferred AWS region, default `us-east-1`
 ```
 
+<p align="center">
+<img src="https://github.com/robmarkcole/aws-text-extraction-app/blob/main/docs/usage.png" width="800">
+</p>
+
 ## Build Dockerfile and run
 Build and run locally:
 ```
