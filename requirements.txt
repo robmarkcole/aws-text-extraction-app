@@ -1,0 +1,4 @@
+numpy>=1.18.5
+Pillow>=7.1.2
+streamlit>=0.73.0
+boto3
