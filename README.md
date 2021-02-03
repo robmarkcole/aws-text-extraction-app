@@ -16,7 +16,8 @@ docker run -e AWS_ACCESS_KEY_ID=yous -e AWS_SECRET_ACCESS_KEY=yours aws-text-ext
 ```
 
 ## Development
-* Create and activate a venv: `python3 -m venv venv` and `source venv/bin/activate`
+* Create a venv: `python3 -m venv venv` 
+* Activate venv: `source venv/bin/activate`
 * Install requirements: `pip3 install -r requirements.txt`
 * Export required environment variables: `export AWS_ACCESS_KEY_ID=yours` and `export AWS_SECRET_ACCESS_KEY=yours`
 * Run from the `app` folder: `streamlit run app.py`

@@ -25,7 +25,7 @@ def pil_image_to_byte_array(image):
 
 @st.cache
 def process_image(image_bytes):
-    response = client.detect_labels(Image={"Bytes": image_bytes})
+    response = client.detect_text(Image={"Bytes": image_bytes})
     return response
 
 
@@ -38,7 +38,7 @@ if img_file_buffer is not None:
     image_array = np.array(Image.open(img_file_buffer))
 
 else:
-    image_bytes = open(DEMO_IMAGE, "rb")
+    image_bytes = open(DEMO_IMAGE, "rb").read()
     image_array = np.array(Image.open(DEMO_IMAGE))
 
 response = process_image(image_bytes)
@@ -50,3 +50,6 @@ st.image(
 
 st.header("Extracted text")
 st.write(extracted_text)
+
+st.header("Raw response")
+st.write(response)
