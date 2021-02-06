@@ -1,4 +1,6 @@
+boto3>=1.17.0
 numpy>=1.18.5
 Pillow>=7.1.2
-streamlit>=0.73.0
-boto3
+pandas>=1.2.1
+streamlit>=0.75.0
+streamlit-drawable-canvas>=0.6.0

@@ -1,4 +1,6 @@
 import streamlit as st
+from streamlit_drawable_canvas import st_canvas
+import pandas as pd
 from PIL import Image
 import io
 import base64
@@ -114,17 +116,26 @@ else:
 response = process_image(image_bytes)
 extracted_text = [t["DetectedText"] for t in response["TextDetections"]]
 
-st.image(
-    image_array, use_column_width=True,
+st.text("Use your cursor to draw regions of interest (ROI)")
+canvas_result = st_canvas(
+    fill_color="rgba(255, 165, 0, 0.3)",  # Fixed fill color with some opacity
+    stroke_width=1,
+    background_image=Image.fromarray(image_array),
+    update_streamlit=True,
+    drawing_mode="rect",
+    key="canvas",
 )
 
-st.header("Extracted text")
-st.write(extracted_text)
+if canvas_result.json_data is not None:
+    st.dataframe(pd.json_normalize(canvas_result.json_data["objects"]))
 
 download_button_str = download_button(
     extracted_text, "extracted_text.json", f"Click here to download extracted_text"
 )
 st.markdown(download_button_str, unsafe_allow_html=True)
 
-st.header("Raw response")
-st.write(response)
+st.header("Extracted text")
+st.write(extracted_text)
+
+# st.header("Raw response")
+# st.write(response)
