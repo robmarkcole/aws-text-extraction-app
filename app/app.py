@@ -127,7 +127,8 @@ canvas_result = st_canvas(
 )
 
 if canvas_result.json_data is not None:
-    st.dataframe(pd.json_normalize(canvas_result.json_data["objects"]))
+    df = pd.json_normalize(canvas_result.json_data["objects"])
+    st.dataframe(df[["left", "top", "width", "height"]])
 
 download_button_str = download_button(
     extracted_text, "extracted_text.json", f"Click here to download extracted_text"
