@@ -101,6 +101,12 @@ def process_image(image_bytes):
     return response
 
 
+## Sidebar
+st.sidebar.text("Add a label to your text")
+label_name = st.sidebar.text_input("Label name", value="default")
+stroke_color = st.sidebar.color_picker("Stroke color hex: ")
+
+
 st.title("Extract text with AWS rekogniton text extraction")
 img_file_buffer = st.file_uploader("Upload an image", type=["png", "jpg", "jpeg"])
 
@@ -120,15 +126,20 @@ st.text("Use your cursor to draw regions of interest (ROI)")
 canvas_result = st_canvas(
     fill_color="rgba(255, 165, 0, 0.3)",  # Fixed fill color with some opacity
     stroke_width=1,
+    stroke_color=stroke_color,
     background_image=Image.fromarray(image_array),
     update_streamlit=True,
     drawing_mode="rect",
     key="canvas",
 )
 
-if canvas_result.json_data is not None:
-    df = pd.json_normalize(canvas_result.json_data["objects"])
-    st.dataframe(df[["left", "top", "width", "height"]])
+try:
+    if canvas_result.json_data:
+        df = pd.json_normalize(canvas_result.json_data["objects"])
+        st.dataframe(df[["stroke", "left", "top", "width", "height"]])
+        # st.dataframe(df)
+except:
+    pass
 
 download_button_str = download_button(
     extracted_text, "extracted_text.json", f"Click here to download extracted_text"
