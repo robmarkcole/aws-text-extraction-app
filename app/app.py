@@ -109,14 +109,14 @@ def persistent_dict():
 label_dict = persistent_dict()
 
 ## Sidebar
-st.sidebar.text("Add a label to your text")
+st.sidebar.text("Select a colour and add a label")
+stroke_color = st.sidebar.color_picker("Label colour")
 label_name = st.sidebar.text_input("Label name", value="default")
-stroke_color = st.sidebar.color_picker("Stroke color hex: ")
-label_dict.update({stroke_color: label_name})
-st.sidebar.write(label_dict)
 
-if st.sidebar.button("Clear"):
-    label_dict = persistent_dict()
+if (label_name not in label_dict.values()) and (stroke_color not in label_dict.keys()):
+    label_dict.update({stroke_color: label_name})
+
+st.sidebar.write(label_dict)
 
 
 st.title("Extract text with AWS rekogniton text extraction")
