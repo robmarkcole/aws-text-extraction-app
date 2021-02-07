@@ -146,13 +146,15 @@ canvas_result = st_canvas(
 )
 
 try:
-    df = pd.json_normalize(canvas_result.json_data["objects"])[
-        ["stroke", "left", "top", "width", "height"]
-    ]
-    df["label"] = df["stroke"].map(lambda x: label_dict.get(x))
-    st.dataframe(df["label", "left", "top", "width", "height"])
-    # st.dataframe(df)
+    if len(canvas_result.json_data["objects"]) > 0:
+        df = pd.json_normalize(canvas_result.json_data["objects"])[
+            ["stroke", "left", "top", "width", "height"]
+        ]
+        df["label"] = df["stroke"].map(lambda x: label_dict.get(x))
+        st.dataframe(df)  #
+        # st.dataframe(df)
 except Exception as exc:
+    # pass
     st.text(exc)
 
 
