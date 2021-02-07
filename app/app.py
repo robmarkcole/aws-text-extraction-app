@@ -146,12 +146,15 @@ canvas_result = st_canvas(
 )
 
 try:
-    if canvas_result.json_data:
-        df = pd.json_normalize(canvas_result.json_data["objects"])
-        st.dataframe(df[["stroke", "left", "top", "width", "height"]])
-        # st.dataframe(df)
-except:
-    pass
+    df = pd.json_normalize(canvas_result.json_data["objects"])[
+        ["stroke", "left", "top", "width", "height"]
+    ]
+    df["label"] = df["stroke"].map(lambda x: label_dict.get(x))
+    st.dataframe(df["label", "left", "top", "width", "height"])
+    # st.dataframe(df)
+except Exception as exc:
+    st.text(exc)
+
 
 download_button_str = download_button(
     extracted_text, "extracted_text.json", f"Click here to download extracted_text"
