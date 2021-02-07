@@ -101,10 +101,22 @@ def process_image(image_bytes):
     return response
 
 
+@st.cache(allow_output_mutation=True, persist=True)
+def persistent_dict():
+    return {}
+
+
+label_dict = persistent_dict()
+
 ## Sidebar
 st.sidebar.text("Add a label to your text")
 label_name = st.sidebar.text_input("Label name", value="default")
 stroke_color = st.sidebar.color_picker("Stroke color hex: ")
+label_dict.update({stroke_color: label_name})
+st.sidebar.write(label_dict)
+
+if st.sidebar.button("Clear"):
+    label_dict = persistent_dict()
 
 
 st.title("Extract text with AWS rekogniton text extraction")
